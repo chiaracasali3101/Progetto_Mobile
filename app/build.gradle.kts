@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -52,13 +54,22 @@ dependencies {
     implementation(libs.fragment.ktx)
     implementation(libs.androidx.recyclerview)
 
-    //Versione vecchia
-    //implementation("com.github.bumptech.glide:glide:5.0.5")
-    //implementation ("androidx.cardview:cardview:1.0.0")
     implementation (libs.androidx.cardview)
     implementation(libs.glide)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Room (Database locale per la Watchlist)
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+
+// Retrofit (API per la ricerca film)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+// Coroutines (Per non bloccare l'app)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }
