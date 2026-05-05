@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Progetto_Mobile"
+rootProject.name = "CorsoLp25-26"
 include(":app")
 include(":ui")
 include(":domain")
