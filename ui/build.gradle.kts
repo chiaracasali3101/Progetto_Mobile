@@ -52,6 +52,12 @@ dependencies {
     //implementation ("androidx.cardview:cardview:1.0.0")
     implementation (libs.androidx.cardview)
     implementation(libs.glide)
+    implementation(libs.androidx.contentpager)
+    implementation(libs.androidx.room3.runtime.android)
+    implementation(libs.androidx.room3.common.jvm)
+    implementation(libs.androidx.room3.runtime.jvm)
+    implementation(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.common.jvm)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
