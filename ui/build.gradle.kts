@@ -1,65 +1,27 @@
 plugins {
-    alias(libs.plugins.android.library)
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace = "com.unibo.android.ui"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
-
-    buildFeatures {
-        viewBinding = true
-    }
+    // Questo è l'indirizzo unico del modulo domain
+    namespace = "com.unibo.android.domain"
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = 31
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+        minSdk = 26
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
 
 dependencies {
-    implementation(project(":domain"))
-
+    // Qui solitamente non serve quasi nulla, lasciamo il minimo
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.fragment.ktx)
-    implementation(libs.androidx.recyclerview)
-
-    //Versione vecchia
-    //implementation("com.github.bumptech.glide:glide:5.0.5")
-    //implementation ("androidx.cardview:cardview:1.0.0")
-    implementation (libs.androidx.cardview)
-    implementation(libs.glide)
-    implementation(libs.androidx.contentpager)
-    implementation(libs.androidx.room3.runtime.android)
-    implementation(libs.androidx.room3.common.jvm)
-    implementation(libs.androidx.room3.runtime.jvm)
-    implementation(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.common.jvm)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }

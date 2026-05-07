@@ -6,6 +6,7 @@ data class TmdbResponse(
 )
 
 data class TmdbMovieDto(
+    val id: Int,
     val titolo: String,
     val anno: String,
     val trama: String,

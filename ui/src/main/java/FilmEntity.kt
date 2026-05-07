@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 @Entity(tabella = "watchlist")
 
 data class FilmEntity(
-    @PrimaryKey val titolo: String,
+    @PrimaryKey val id: Int,
+    val titolo: String,
     val anno: String,
     val trama: String,
     val genere: String,
