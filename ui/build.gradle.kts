@@ -24,4 +24,5 @@ android {
 dependencies {
     // Qui solitamente non serve quasi nulla, lasciamo il minimo
     implementation(libs.androidx.core.ktx)
+    implementation(libs.room.ktx)
 }
