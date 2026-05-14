@@ -1,0 +1,5 @@
+int drawable ic_account_box 0x0
+int drawable ic_favorite 0x0
+int drawable ic_home 0x0
+int string title_activity_main 0x0
+int style Theme_CorsoLp2526 0x0

@@ -1,0 +1,28 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml:2:1-12:12
+INJECTED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml:2:1-12:12
+	package
+		INJECTED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml:4:5-10:19
+activity#com.unibo.android.uicompose.MainActivity
+ADDED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml:5:9-9:56
+	android:label
+		ADDED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml:8:13-56
+	android:exported
+		ADDED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml:7:13-37
+	android:theme
+		ADDED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml:9:13-53
+	android:name
+		ADDED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml:6:13-41
+uses-sdk
+INJECTED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml
+INJECTED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/chiaracasali/Desktop/laboratorio di programmazione di sistemi mobili/Lab11Maggio/CorsoLP25_26_20260511_codice_partenza/uicompose/src/main/AndroidManifest.xml

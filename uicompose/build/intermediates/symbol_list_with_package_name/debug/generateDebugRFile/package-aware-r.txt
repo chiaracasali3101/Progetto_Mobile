@@ -1,0 +1,6 @@
+com.unibo.android.uicompose
+drawable ic_account_box
+drawable ic_favorite
+drawable ic_home
+string title_activity_main
+style Theme_CorsoLp2526
