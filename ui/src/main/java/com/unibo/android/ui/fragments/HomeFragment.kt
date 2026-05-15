@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.unibo.android.domain.di.UseCasesProvider
 import com.unibo.android.ui.adapters.AccomodationAdapter
 import com.unibo.android.ui.R
 import kotlinx.coroutines.launch
