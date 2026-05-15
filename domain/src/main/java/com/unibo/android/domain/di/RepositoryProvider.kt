@@ -1,7 +1,9 @@
 package com.unibo.android.domain.di
 
-import com.unibo.android.domain.repositories.AccommodationRepository
+// Usiamo il nuovo nome MovieRepository al posto di AccommodationRepository
+import com.unibo.android.domain.repositories.MovieRepository
 
 interface RepositoryProvider {
-    val accommodationRepository: AccommodationRepository
+    // Anche qui, cambiamo il nome della variabile per chiarezza
+    val movieRepository: MovieRepository
 }
