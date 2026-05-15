@@ -1,10 +1,9 @@
-package com.unibo.android.data.local
+package com.unibo.android.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tabella = "watchlist")
-
+@Entity(tableName = "watchlist")
 data class FilmEntity(
     @PrimaryKey val id: Int,
     val titolo: String,
@@ -14,5 +13,6 @@ data class FilmEntity(
     val durata: String,
     val regista: String,
     val punteggio: Double,
+    val posterPath: String,
     val preferito: Boolean = false
 )

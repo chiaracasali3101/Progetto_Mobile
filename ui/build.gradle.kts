@@ -4,7 +4,6 @@ plugins {
 }
 
 android {
-    // Questo è l'indirizzo unico del modulo domain
     namespace = "com.unibo.android.domain"
     compileSdk = 34
 
@@ -16,13 +15,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 
 dependencies {
-    // Qui solitamente non serve quasi nulla, lasciamo il minimo
     implementation(libs.androidx.core.ktx)
-    implementation(libs.room.ktx)
+    implementation(libs.androidx.room.ktx)
 }
