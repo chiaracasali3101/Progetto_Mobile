@@ -13,6 +13,6 @@ data class FilmEntity(
     val durata: String,
     val regista: String,
     val punteggio: Double,
-    val posterPath: String,
+    val percorsoLocandina: String,
     val preferito: Boolean = false
 )

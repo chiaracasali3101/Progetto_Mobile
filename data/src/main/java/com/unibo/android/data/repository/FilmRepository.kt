@@ -1,7 +1,7 @@
 package com.unibo.android.data.repository
 
 import com.unibo.android.data.local.FilmDao
-import com.unibo.android.data.local.FilmEntity
+import com.unibo.android.data.entities.FilmEntity
 import com.unibo.android.data.remote.FilmApiService
 
 class FilmRepository(
@@ -21,17 +21,23 @@ class FilmRepository(
             val entities = risposta.results.map { dto ->
                 FilmEntity(
                     id = dto.id,
-                    titolo = dto.title,
-                    trama = dto.overview,
-
-                    percorsoLocandina = if (dto.posterPath != null) BASE_IMAGE_URL + dto.posterPath else ""
+                    titolo = dto.titolo,
+                    anno = dto.anno,
+                    trama = dto.trama,
+                    genere = dto.genere,
+                    durata = dto.durata,
+                    regista = dto.regista,
+                    punteggio = 0.0,
+                    percorsoLocandina = if (dto.percorsoLocandina != null) BASE_IMAGE_URL + dto.percorsoLocandina else "",
+                    preferito = false
                 )
             }
 
             // salvataggio nel DB locale
-            entities.forEach { filmDao.inserisciFilm(it) }
+            entities.forEach { film -> filmDao.addWatchlist(movie = film) }
 
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             e.printStackTrace()
         }
     }

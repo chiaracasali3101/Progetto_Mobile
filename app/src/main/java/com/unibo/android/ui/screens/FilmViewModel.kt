@@ -1,11 +1,12 @@
 package com.unibo.android.ui.viewmodel
 
+import android.R.attr.apiKey
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.unibo.android.data.local.entities.FilmEntity
+import com.unibo.android.data.entities.FilmEntity
 import com.unibo.android.data.repositories.FilmRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,8 +35,8 @@ class FilmViewModel(private val repository: FilmRepository) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                // Chiediamo al repository di cercarci i film (dal web o DB)
-                repository.searchMovies(query).collect { listaFilm ->
+
+                repository.searchMovies(query = query, apiKey = "f68e046df68555567f96d4cdfcc3ffdf").collect { listaFilm ->
                     _risultatiRicerca.value = listaFilm
                 }
             } catch (e: Exception) {

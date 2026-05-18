@@ -10,15 +10,26 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FilmDao {
-    @Query("SELECT * FROM watchlist ORDER BY addedAt DESC")
-    fun getWatchlist(): Flow<List<FilmEntity>>
+    //lettura
+    @Query("SELECT * FROM watchlist")
+    fun getTuttiIFilm(): Flow<List<FilmEntity>>
 
+    //inserimento
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
-    suspend fun addToWatchlist(movie: FilmEntity)
+    suspend fun addWatchlist(movie: FilmEntity)
 
+    //eliminazione
     @Delete
-    suspend fun removeFromWatchlist(movie: FilmEntity)
+    suspend fun removeWatchlist(movie: FilmEntity)
 
+    //controllo
     @Query("SELECT EXISTS(SELECT * FROM watchlist WHERE id = :id)")
     suspend fun isFavorite(id: Int): Boolean
+
+    //ricerca
+    @Query("SELECT * FROM watchlist WHERE titolo LIKE '%' || :string || '%' ")
+    fun getFilmsByQuery(string: String): Flow<List<FilmEntity>>
+
+    @Query("SELECT * FROM watchlist WHERE id = :id")
+    suspend fun getFilmById(id: Int): FilmEntity?
 }

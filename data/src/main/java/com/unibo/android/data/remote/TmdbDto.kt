@@ -1,16 +1,17 @@
 package com.unibo.android.data.remote
 
-import com.google.gson.annotations.SerializedName
+import com.google.gson.annotations.SerializedName //gson = libreria per interrogare il sito, fa parsing da json a kotlin
 data class TmdbResponse(
-    val results: List<TmdbMovieDto>
+    @SerializedName("results") val results: List<TmdbMovieDto>
 )
 
 data class TmdbMovieDto(
-    val id: Int,
-    val titolo: String,
-    val anno: String,
-    val trama: String,
-    val genere: String,
-    val durata: String,
-    val regista: String,
+    @SerializedName("id") val id: Int,
+    @SerializedName("title") val titolo: String,
+    @SerializedName("release_date") val anno: String,
+    @SerializedName("overview") val trama: String,
+    val genere: String = "",
+    val durata: String = "",
+    val regista: String = "",
+    @SerializedName("poster_path") val percorsoLocandina: String?
 )
