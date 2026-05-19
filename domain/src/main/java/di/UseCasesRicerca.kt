@@ -7,9 +7,8 @@ class UseCasesRicerca(
     private val repository: FilmRepository
 ) {
 
-
-    suspend operator fun invoke(id: Int): List<FilmEntity> {
-        return repository.getFilmsByQuery(id)
+    suspend operator fun invoke(query: String): List<FilmEntity> {
+        return repository.getFilmsByQuery(query)
     }
 
 }
