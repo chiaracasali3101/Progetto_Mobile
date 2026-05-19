@@ -11,4 +11,6 @@ class UseCasesRicerca(
         return repository.getFilmsByQuery(query)
     }
 
+    fun execute(query: String) {}
+
 }

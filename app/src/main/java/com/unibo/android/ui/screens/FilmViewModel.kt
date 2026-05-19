@@ -1,19 +1,18 @@
-package com.unibo.android.ui.viewmodel
+package com.unibo.android.corsolp2526
 
-import android.R.attr.apiKey
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unibo.android.data.entities.FilmEntity
-import com.unibo.android.data.repositories.FilmRepository
+import com.unibo.android.domain.di.UseCasesProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class FilmViewModel(private val repository: FilmRepository) : ViewModel() {
+class FilmViewModel : ViewModel() {
 
     var searchQuery by mutableStateOf("")
         private set
@@ -27,7 +26,6 @@ class FilmViewModel(private val repository: FilmRepository) : ViewModel() {
     }
 
     private fun cercaFilm(query: String) {
-
         if (query.isBlank()) {
             _risultatiRicerca.value = emptyList()
             return
@@ -35,12 +33,8 @@ class FilmViewModel(private val repository: FilmRepository) : ViewModel() {
 
         viewModelScope.launch {
             try {
-
-                repository.searchMovies(query = query, apiKey = "f68e046df68555567f96d4cdfcc3ffdf").collect { listaFilm ->
-                    _risultatiRicerca.value = listaFilm
-                }
+                UseCasesProvider.useCasesRicerca.execute(query).toString()
             } catch (e: Exception) {
-
                 _risultatiRicerca.value = emptyList()
             }
         }
