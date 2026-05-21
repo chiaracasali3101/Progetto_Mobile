@@ -1,6 +1,7 @@
 package com.unibo.android.ui.screens
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,7 +12,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -20,9 +22,8 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,7 +36,7 @@ val WarmCream = Color(0xFFF3F0DF)
 val BoldRed = Color(0xFFB22222)
 val LightMutedCream = Color(0xFFD1B08C)
 
-@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Ricerca(
     query: String,
@@ -50,47 +51,47 @@ fun Ricerca(
                 color = DeepMaroon,
                 modifier = Modifier.windowInsetsPadding(WindowInsets.statusBars)
             ) {
-                TopAppBar(
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = DeepMaroon
-                    ),
-                    title = {
-                        OutlinedTextField(
-                            value = query,
-                            onValueChange = { nuovoTesto -> onQueryChange(nuovoTesto) },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(end = 16.dp),
-                            label = { Text("Cerca un film...", color = LightMutedCream) },
-                            singleLine = true,
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Filled.Home,
-                                    contentDescription = "Cerca",
-                                    tint = LightMutedCream
-                                )
-                            },
-                            trailingIcon = {
-                                if (query.isNotEmpty()) {
-                                    IconButton(onClick = { onQueryChange("") }) {
-                                        Icon(
-                                            imageVector = Icons.Filled.Close,
-                                            contentDescription = "Svuota",
-                                            tint = BoldRed
-                                        )
-                                    }
-                                }
-                            },
-                            colors = OutlinedTextFieldDefaults.colors(
-                                focusedBorderColor = BoldRed,
-                                unfocusedBorderColor = LightMutedCream,
-                                cursorColor = BoldRed,
-                                focusedLabelColor = BoldRed,
-                                unfocusedLabelColor = LightMutedCream
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                ) {
+                    OutlinedTextField(
+                        value = query,
+                        onValueChange = { nuovoTesto -> onQueryChange(nuovoTesto) },
+                        modifier = Modifier.fillMaxWidth(),
+                        placeholder = { Text("Cerca un film...", color = LightMutedCream) },
+                        singleLine = true,
+                        shape = MaterialTheme.shapes.medium, // Arrotondato coerente con il vostro profilo
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Filled.Search, // Icona lente d'ingrandimento corretta
+                                contentDescription = "Cerca",
+                                tint = LightMutedCream
                             )
+                        },
+                        trailingIcon = {
+                            if (query.isNotEmpty()) {
+                                IconButton(onClick = { onQueryChange("") }) {
+                                    Icon(
+                                        imageVector = Icons.Filled.Close,
+                                        contentDescription = "Svuota",
+                                        tint = BoldRed
+                                    )
+                                }
+                            }
+                        },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = BoldRed,
+                            unfocusedBorderColor = LightMutedCream.copy(alpha = 0.5f),
+                            cursorColor = BoldRed,
+                            focusedTextColor = WarmCream,
+                            unfocusedTextColor = WarmCream,
+                            focusedContainerColor = DeepMaroon,
+                            unfocusedContainerColor = DeepMaroon
                         )
-                    }
-                )
+                    )
+                }
             }
         }
     ) { paddingValues ->
@@ -99,32 +100,35 @@ fun Ricerca(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues),
-                contentAlignment = androidx.compose.ui.Alignment.Center
+                contentAlignment = Alignment.Center
             ) {
-                Text(text = "Nessun film trovato",
+                Text(
+                    text = "Nessun film trovato",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = LightMutedCream)
+                    color = LightMutedCream
+                )
             }
         } else {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
+                    .padding(paddingValues),
+                contentPadding = PaddingValues(vertical = 8.dp) // Dà respiro all'inizio e alla fine della lista
             ) {
                 items(listaFilm) { film ->
-                    FilmCard(
-                        film = film,
-                        onClick = {
-                            onMovieClick(film)
-                        }
-                    )
+                    Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+                        FilmCard(
+                            film = film,
+                            onClick = { onMovieClick(film) }
+                        )
+                    }
                 }
             }
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun RicercaPreview() {
     val filmFinti = listOf(
