@@ -1,6 +1,7 @@
 package com.unibo.android.corsolp2526.presentation.leaderboard
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.unibo.android.corsolp2526.data.model.MovieDto
 import com.unibo.android.corsolp2526.domain.repository.MovieRepository
@@ -25,5 +26,17 @@ class ClassificaViewModel(
                 e.printStackTrace()
             }
         }
+    }
+}
+
+class ClassificaViewModelFactory(
+    private val repository: MovieRepository
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(ClassificaViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return ClassificaViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Classe ViewModel sconosciuta")
     }
 }

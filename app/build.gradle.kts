@@ -59,6 +59,9 @@ dependencies {
     implementation (libs.androidx.cardview)
     implementation(libs.glide)
 
+    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
