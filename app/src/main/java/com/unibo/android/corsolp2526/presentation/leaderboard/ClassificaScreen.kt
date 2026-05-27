@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 
 @Composable
 fun ClassificaScreen(viewModel: ClassificaViewModel) {
@@ -76,7 +77,8 @@ fun ClassificaScreen(viewModel: ClassificaViewModel) {
                     posizione = index + 1,
                     titolo = film.title ?: "Titolo n.d.",
                     anno = film.releaseDate?.take(4) ?: "Anno n.d.",
-                    voto = film.voteAverage ?: 0.0
+                    voto = film.voteAverage ?: 0.0,
+                    posterPath = film.posterPath
                 )
             }
         }
@@ -86,7 +88,7 @@ fun ClassificaScreen(viewModel: ClassificaViewModel) {
 }
 
 @Composable
-fun ClassificaItem(posizione: Int, titolo: String, anno: String, voto: Double) {
+fun ClassificaItem(posizione: Int, titolo: String, anno: String, voto: Double, posterPath: String?) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -104,7 +106,10 @@ fun ClassificaItem(posizione: Int, titolo: String, anno: String, voto: Double) {
 
         Spacer(modifier = Modifier.width(16.dp))
 
-        Box(
+        val imageUrl = if (posterPath != null) "https://image.tmdb.org/t/p/w500$posterPath" else null
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = "Locandina di $titolo",
             modifier = Modifier
                 .width(80.dp)
                 .height(120.dp)
