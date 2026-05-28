@@ -2,35 +2,37 @@ package com.unibo.android.ui.fragments
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.unibo.android.domain.models.AccommodationType
-import com.unibo.android.domain.usecases.FetchAccommodationListUpdatesUseCase
-import com.unibo.android.domain.usecases.StartFetchAccommodationListUseCase
+import com.unibo.android.domain.models.FilmType // Usiamo FilmType
+import com.unibo.android.domain.usecases.GetMovieListUseCase // Il nuovo UseCase
+import com.unibo.android.domain.usecases.StartFetchMovieListUseCase // Il nuovo StartUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val startFetchAccommodationListUseCase: StartFetchAccommodationListUseCase,
-    private val fetchAccommodationListUpdatesUseCase: FetchAccommodationListUpdatesUseCase
+    private val startFetchAccommodationListUseCase: StartFetchMovieListUseCase,
+    private val fetchAccommodationListUpdatesUseCase: GetMovieListUseCase
 ): ViewModel() {
 
-    private val _accommodationTypeList = MutableStateFlow<List<AccommodationType>>(emptyList())
-    val accommodationTypeList: StateFlow<List<AccommodationType>> = _accommodationTypeList
+    // Cambiato in FilmType
+    private val _accommodationTypeList = MutableStateFlow<List<FilmType>>(emptyList())
+    val accommodationTypeList: StateFlow<List<FilmType>> = _accommodationTypeList
 
     init {
-        fetchAccommodationListUpdates()
+        // Se vuoi caricare i dati all'avvio, puoi chiamare una funzione qui
     }
 
     fun startFetchAccommodationList() {
+        // Nota: se nel tuo UseCase il metodo si chiama execute(), usa .execute()
         startFetchAccommodationListUseCase.invoke()
     }
 
+    // Se questo metodo ti dà errore perché GetMovieListUseCase non è un Flow,
+    // puoi commentarlo o adattarlo. Per ora lo sistemiamo per non bloccare il Build:
     private fun fetchAccommodationListUpdates() {
         viewModelScope.launch {
-            fetchAccommodationListUpdatesUseCase.invoke().collect { accommodationList ->
-                _accommodationTypeList.emit(accommodationList)
-            }
+            val list = fetchAccommodationListUpdatesUseCase.execute()
+            _accommodationTypeList.value = list
         }
     }
 }
