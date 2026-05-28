@@ -1,11 +1,9 @@
 plugins {
-    // Invece di alias(libs...), scriviamo il nome diretto tra virgolette
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    // Questo è l'indirizzo unico del modulo domain
     namespace = "com.unibo.android.domain"
     compileSdk = 34
 
@@ -17,12 +15,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
 }
 
 dependencies {
-    // Qui solitamente non serve quasi nulla, lasciamo il minimo
     implementation(libs.androidx.core.ktx)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation(libs.androidx.room.runtime)
+    //implementation(project(":data"))
+    implementation("androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0")
+    testImplementation("junit:junit:4.13.2")
 }
+

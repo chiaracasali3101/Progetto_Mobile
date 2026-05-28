@@ -2,7 +2,10 @@ package com.unibo.android.data.repositories
 
 import com.unibo.android.data.entities.FilmEntity
 import com.unibo.android.data.local.FilmDao
-import com.unibo.android.data.remote.FilmApiService
+import com.unibo.android.data.local.dao.FilmDao
+import com.unibo.android.data.local.entities.FilmEntity
+import com.unibo.android.data.remote.api.FilmApiService
+import com.unibo.android.data.remote.dto.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
@@ -12,42 +15,30 @@ class FilmRepository(
     private val apiService: FilmApiService
 ) {
 
-    fun searchMovies(query: String, apiKey: String): Flow<List<FilmEntity>> = flow {
+    fun searchMovies(query: String): Flow<List<FilmEntity>> = flow {
         val cache = filmDao.getFilmsByQuery("%$query%")
-        emit(cache as List<FilmEntity>)
+        emit(cache)
 
         try {
 
-            val response = apiService.getFilmPopolari(apiKey = apiKey)
+            val response = apiService.searchMovies(query = query)
 
-                val movieDtos = response.results
+            if (response.isSuccessful) {
+                val movieDtos = response.body()?.results ?: emptyList()
 
-                val entities = movieDtos.map { dto ->
-                    FilmEntity(
-                        id = dto.id,
-                        titolo = dto.titolo,
-                        anno = dto.anno,
-                        trama = dto.trama,
-                        genere = dto.genere,
-                        durata = dto.durata,
-                        regista = dto.regista,
-                        punteggio = 0.0,
-                        percorsoLocandina = if (dto.percorsoLocandina != null) "https://image.tmdb.org/t/p/w500" + dto.percorsoLocandina else "",
-                        preferito = false
-                    )
-                }
 
-            entities.forEach { film ->
-                filmDao.addWatchlist(movie = film)
+                val entities = movieDtos.map { it.toEntity() }
+
+                filmDao.insertAll(entities)
+
+                emit(entities)
             }
-            emit(value = entities)
-
         } catch (e: Exception) {
-        e.printStackTrace()
+            e.printStackTrace()
         }
     }
 
-    suspend fun getFilmById(id: Int): FilmEntity? {
+    fun getFilmById(id: Int): Flow<FilmEntity?> {
         return filmDao.getFilmById(id)
     }
 }

@@ -28,7 +28,7 @@ interface FilmDao {
 
     //ricerca
     @Query("SELECT * FROM watchlist WHERE titolo LIKE '%' || :string || '%' ")
-    fun getFilmsByQuery(string: String): Flow<List<FilmEntity>>
+    fun getFilmsByQuery(string: String): List<FilmEntity>
 
     @Query("SELECT * FROM watchlist WHERE id = :id")
     suspend fun getFilmById(id: Int): FilmEntity?
