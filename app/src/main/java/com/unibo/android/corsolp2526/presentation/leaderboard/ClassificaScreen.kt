@@ -23,12 +23,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.unibo.android.corsolp2526.data.model.MovieDto
 
 @Composable
 fun ClassificaScreen(viewModel: ClassificaViewModel) {
-    val backgroundColor = Color(0xFF3B0000)
-
     val listaFilm by viewModel.topRatedMovies.collectAsState()
+
+    ClassificaContent(listaFilm = listaFilm)
+}
+
+@Composable
+fun ClassificaContent(listaFilm: List<MovieDto>) {
+    val backgroundColor = Color(0xFF3B0000)
 
     LazyColumn(
         modifier = Modifier
