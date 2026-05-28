@@ -33,8 +33,6 @@ data class Curiosita(
 
 @Composable
 fun HomeScreen() {
-    val backgroundColor = Color(0xFF3B0000)
-
     val listaCuriosita = listOf(
         Curiosita(
             titolo = "1) CHI HA INVENTATO IL CINEMA?",
@@ -62,6 +60,13 @@ fun HomeScreen() {
             immagine = R.drawable.img_ticket
         )
     )
+
+    HomeContent(listaCuriosita = listaCuriosita)
+}
+
+@Composable
+fun HomeContent(listaCuriosita: List<Curiosita>) {
+    val backgroundColor = Color(0xFF3B0000)
 
     LazyColumn(
         modifier = Modifier
@@ -162,7 +167,7 @@ fun CuriositaRow(curiosita: Curiosita, immagineASinistra: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 40.dp, vertical = 16.dp), // <--- RIDOTTO DA 40.dp A 16.dp
+            .padding(horizontal = 40.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (immagineASinistra) {
