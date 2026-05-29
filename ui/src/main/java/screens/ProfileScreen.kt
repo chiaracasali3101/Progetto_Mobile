@@ -24,7 +24,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-// IMPORTANTE: Questo import ora punta al modulo UI dove hai spostato la foto
 import com.unibo.android.ui.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,8 +35,6 @@ fun ProfileScreen() {
     val coloreRossoTesto = Color(0xFFB14A36)
     val coloreRossoBottoni = Color(0xFF8C0902)
 
-    var mostraMenuFoto by remember { mutableStateOf(false) }
-
     val listaFilmVisti = listOf(
         Pair("Inception", "8.5"), Pair("Interstellar", "8.5"), Pair("Pulp Fiction", "9.0"),
         Pair("WinterMarter", "8.5"), Pair("Sal:lisare", "8.5"), Pair("The Prestige", "8.8")
@@ -46,7 +43,7 @@ fun ProfileScreen() {
 
     Box(modifier = Modifier.fillMaxSize().background(sfondoMarrone)) {
 
-        // --- SFONDO SFUMATO (Cerca la foto nel modulo UI) ---
+        // --- SFONDO SFUMATO ---
         Box(modifier = Modifier.fillMaxWidth().height(420.dp)) {
             Image(
                 painter = painterResource(id = R.drawable.sfondo_profilo),
@@ -63,7 +60,7 @@ fun ProfileScreen() {
             )
         }
 
-        // --- CONTENUTO ---
+        // --- CONTENUTO IN COLONNA REGOLE ---
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -79,9 +76,9 @@ fun ProfileScreen() {
             Text(text = "IL TUO PROFILO", color = coloreCrema, fontSize = 13.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp)
             Spacer(modifier = Modifier.height(45.dp))
 
+            // --- FOTO PROFILO (Semplice, non serve più cliccarla) ---
             Box(
-                modifier = Modifier.size(120.dp).clip(CircleShape).background(sfondoMarrone)
-                    .border(3.dp, coloreOro, CircleShape).clickable { mostraMenuFoto = true },
+                modifier = Modifier.size(120.dp).clip(CircleShape).background(sfondoMarrone).border(3.dp, coloreOro, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null, modifier = Modifier.size(90.dp), tint = coloreCrema.copy(alpha = 0.8f))
@@ -91,8 +88,51 @@ fun ProfileScreen() {
             Text(text = "Ana", color = coloreCrema, fontSize = 28.sp, fontWeight = FontWeight.Bold)
             Text(text = "ana.systemexpert@unibo.it", color = coloreCrema.copy(alpha = 0.6f), fontSize = 14.sp)
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(25.dp))
 
+            // --- 🛠️ NUOVO BLOCCO FISSO: OPZIONI IMMAGINE DEL PROFILO ---
+            Card(
+                modifier = Modifier.fillMaxWidth(0.9f),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF3A0605).copy(alpha = 0.7f)),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+                    Text(
+                        text = "Immagine del profilo",
+                        color = coloreCrema,
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    // Tasto 1: Fotocamera
+                    Row(
+                        modifier = Modifier.fillMaxWidth().clickable { /* Logica scatta foto */ }.padding(vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(imageVector = Icons.Default.CameraAlt, contentDescription = null, tint = coloreRossoTesto, modifier = Modifier.size(22.dp))
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(text = "Scatta una foto direttamente", color = coloreCrema, fontSize = 14.sp)
+                    }
+
+                    // Linea divisoria interna
+                    HorizontalDivider(color = coloreCrema.copy(alpha = 0.1f), thickness = 1.dp)
+
+                    // Tasto 2: Galleria
+                    Row(
+                        modifier = Modifier.fillMaxWidth().clickable { /* Logica galleria */ }.padding(vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(imageVector = Icons.Default.PhotoLibrary, contentDescription = null, tint = coloreRossoTesto, modifier = Modifier.size(22.dp))
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(text = "Seleziona dalla galleria", color = coloreCrema, fontSize = 14.sp)
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(25.dp))
+
+            // --- STATISTICHE ---
             Row(modifier = Modifier.fillMaxWidth(0.9f), horizontalArrangement = Arrangement.spacedBy(15.dp)) {
                 StatisticCard(Modifier.weight(1f), "52", "Film Visti", coloreRossoBottoni, coloreCrema)
                 StatisticCard(Modifier.weight(1f), "14", "Recensioni", coloreRossoBottoni, coloreCrema)
@@ -100,6 +140,7 @@ fun ProfileScreen() {
 
             Spacer(modifier = Modifier.height(25.dp))
 
+            // --- BOTTONE CERCA SALE ---
             Button(
                 onClick = { },
                 modifier = Modifier.fillMaxWidth(0.9f).height(50.dp),
@@ -113,6 +154,7 @@ fun ProfileScreen() {
 
             Spacer(modifier = Modifier.height(40.dp))
 
+            // --- LISTE FILM RECENTI E WATCHLIST ---
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(15.dp)) {
                 Column(modifier = Modifier.weight(1f)) {
                     SectionTitle("FILM RECENTI")
@@ -124,12 +166,6 @@ fun ProfileScreen() {
                 }
             }
             Spacer(modifier = Modifier.height(40.dp))
-        }
-
-        if (mostraMenuFoto) {
-            ModalBottomSheet(onDismissRequest = { mostraMenuFoto = false }, containerColor = Color(0xFF2A0302)) {
-                BottomSheetContent(coloreCrema, coloreOro) { mostraMenuFoto = false }
-            }
         }
     }
 }
@@ -171,24 +207,6 @@ fun MovieItem(title: String, subtitle: String, icon: androidx.compose.ui.graphic
                 }
             }
             Text(text = subtitle, color = subColor, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-        }
-    }
-}
-
-@Composable
-fun BottomSheetContent(textColor: Color, iconColor: Color, onDismiss: () -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth().padding(20.dp).navigationBarsPadding()) {
-        Text(text = "Immagine del profilo", color = textColor, fontSize = 17.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(20.dp))
-        Row(modifier = Modifier.fillMaxWidth().clickable { onDismiss() }.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(imageVector = Icons.Default.AddAPhoto, contentDescription = null, tint = iconColor)
-            Spacer(modifier = Modifier.width(15.dp))
-            Text(text = "Scatta una foto", color = textColor)
-        }
-        Row(modifier = Modifier.fillMaxWidth().clickable { onDismiss() }.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(imageVector = Icons.Default.PhotoLibrary, contentDescription = null, tint = iconColor)
-            Spacer(modifier = Modifier.width(15.dp))
-            Text(text = "Scegli dalla galleria", color = textColor)
         }
     }
 }
