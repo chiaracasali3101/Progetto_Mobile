@@ -1,5 +1,6 @@
 plugins {
-    alias(libs.plugins.android.library)
+    // Plugin Kotlin puro (niente Android qui)
+    id("org.jetbrains.kotlin.jvm")
 }
 
 android {
@@ -33,11 +34,11 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    // Solo librerie Kotlin/Java standard, nessuna libreria Android
+
+    // JUnit per i test unitari della logica di business
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.google.code.gson:gson:2.10.1")
+
+    // ECCO LA MODIFICA: ho rimosso i "//" in modo che la libreria venga scaricata!
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 }
