@@ -10,6 +10,7 @@ import com.unibo.android.ui.databinding.ActivityHomeBinding
 import com.unibo.android.ui.fragments.HomeFragment
 import com.unibo.android.ui.fragments.SettingsFragment
 
+// ⚠️ NOTA: Questa Activity è deprecata (Legacy). Ora usiamo MainActivity + Compose.
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
@@ -17,10 +18,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        // Set the content view using the generated binding class
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //setContentView(R.layout.activity_home)
 
         val dataValue = intent.getStringExtra(splashActivityFakeDataKey)
         Log.d("HomeActivityTest", "Dato ricevuto da SPLASH: $dataValue")
@@ -35,8 +34,8 @@ class HomeActivity : AppCompatActivity() {
             addToBackStack("home_fragment")
         }
 
+        /* COMMENTATO PER EVITARE ERRORI DI COMPILAZIONE (CustomButton spostato in _legacy)
         binding.btnSettings.setOnClickListener {
-            //findViewById<Button>(R.id.btnSettings).setOnClickListener {
             supportFragmentManager.commit {
                 replace(
                     R.id.fragmentContainerView,
@@ -45,9 +44,8 @@ class HomeActivity : AppCompatActivity() {
                 addToBackStack("settings_fragment")
             }
         }
+        */
     }
-
-
 
     private fun setResultsForSplash() {
         val data = Intent()
