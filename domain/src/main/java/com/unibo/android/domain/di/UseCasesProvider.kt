@@ -1,24 +1,25 @@
 package com.unibo.android.domain.di
 
-import com.unibo.android.domain.usecases.FetchAccommodationListUpdatesUseCase
-import com.unibo.android.domain.usecases.FetchAccommodationListUpdatesUseCaseImpl
-import com.unibo.android.domain.usecases.StartFetchAccommodationListUseCase
-import com.unibo.android.domain.usecases.StartFetchAccommodationListUseCaseImpl
+import com.unibo.android.domain.usecases.GetMovieListUseCase
+import com.unibo.android.domain.usecases.GetMovieListUseCaseImpl
+import com.unibo.android.domain.usecases.StartFetchMovieListUseCase
+import com.unibo.android.domain.usecases.StartFetchMovieListUseCaseImpl
 
 object UseCasesProvider {
 
-    lateinit var startFetchAccommodationListUseCase: StartFetchAccommodationListUseCase
-    lateinit var fetchAccommodationListUpdatesUseCase: FetchAccommodationListUpdatesUseCase
+    lateinit var startFetchMovieListUseCase: StartFetchMovieListUseCase
+    lateinit var getMovieListUseCase: GetMovieListUseCase // Aggiornato qui
 
     fun setup(
         repositoryProvider: RepositoryProvider
     ) {
-        startFetchAccommodationListUseCase = StartFetchAccommodationListUseCaseImpl(
-            accommodationRepository = repositoryProvider.accommodationRepository
+        startFetchMovieListUseCase = StartFetchMovieListUseCaseImpl(
+            movieRepository = repositoryProvider.movieRepository
         )
 
-        fetchAccommodationListUpdatesUseCase = FetchAccommodationListUpdatesUseCaseImpl(
-            accommodationRepository = repositoryProvider.accommodationRepository
+        // Aggiornato qui con il nuovo caso d'uso esistente
+        getMovieListUseCase = GetMovieListUseCaseImpl(
+            movieRepository = repositoryProvider.movieRepository
         )
     }
 }
