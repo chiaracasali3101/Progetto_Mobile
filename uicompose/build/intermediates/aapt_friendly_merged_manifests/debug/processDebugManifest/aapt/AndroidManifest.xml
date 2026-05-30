@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.unibo.android.uicompose" >
+
+    <uses-sdk android:minSdkVersion="31" />
+
+    <application>
+        <activity
+            android:name="com.unibo.android.uicompose.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.CorsoLp2526" />
+    </application>
+
+</manifest>

@@ -1,0 +1,7 @@
+R_DEF: Internal format may change without notice
+local
+drawable ic_account_box
+drawable ic_favorite
+drawable ic_home
+string title_activity_main
+style Theme.CorsoLp2526
