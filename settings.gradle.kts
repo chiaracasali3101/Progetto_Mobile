@@ -22,8 +22,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Progetto_Mobile"
+rootProject.name = "CorsoLp25-26"
 include(":app")
-include(":data")
-include(":domain")
 include(":ui")
+include(":domain")
+include(":data")

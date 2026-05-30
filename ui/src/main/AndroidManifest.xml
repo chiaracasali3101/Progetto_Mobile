@@ -3,14 +3,13 @@
     <application>
 
         <activity
-            android:name="com.unibo.android.SplashActivity"
+            android:name="com.unibo.android.corsolp2526.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.unibo.android.HomeActivity" />
+
     </application>
 </manifest>
