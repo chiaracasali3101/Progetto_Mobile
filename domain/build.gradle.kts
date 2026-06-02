@@ -3,11 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
 }
 
-android {
-    namespace = "com.unibo.android.domain"
-
-}
-
 dependencies {
     // Solo librerie Kotlin/Java standard, nessuna libreria Android
 

@@ -1,8 +1,12 @@
-
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    id("org.jetbrains.kotlin.kapt")
+}
 
 android {
     namespace = "com.unibo.android.data"
-
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 31
@@ -15,7 +19,6 @@ android {
     }
 }
 
-// Configura Kotlin usando il blocco kotlin globale
 kotlin {
     jvmToolchain(17)
 }
